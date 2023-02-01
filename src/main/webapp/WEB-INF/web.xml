@@ -1,0 +1,89 @@
+<web-app version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>Spring MVC Application</display-name>
+
+    <servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+    <!--SSO LIVE-->
+
+    <filter>
+        <filter-name>ssofilter</filter-name>
+        <filter-class>bt.gov.ditt.sso.client.SSOServletFilter</filter-class><!-- Checks whether there is valid session or not else redirects to SSO -->
+        <init-param>
+            <param-name>CONSUMER_KEY</param-name>
+            <param-value>89VRdLNXc7chWcIUUQ2JLsO2eZ0a</param-value>
+        </init-param>
+        <init-param>
+            <param-name>CONSUMER_SECRET</param-name>
+            <param-value>kEOlN_5LOclEpuK_c8pgeJMLAfIa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>RESPONSE_URL</param-name>
+            <param-value>https://www.citizenservices.gov.bt/census/sso/acs</param-value>
+        </init-param>
+        <init-param>
+            <param-name>AUTHORIZATION_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oauth2/authorize</param-value>
+        </init-param>
+        <init-param>
+            <param-name>TOKEN_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oauth2/token</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LOGOUT_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oidc/logout</param-value>
+        </init-param>
+        <init-param>
+            <param-name>CHECK_SESSION_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oidc/checksession</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LOGOUT_CALLBACK</param-name>
+            <param-value>https://www.citizenservices.gov.bt/gt/sso/oidclogout</param-value>
+        </init-param>
+        <init-param>
+            <param-name>AFTER_LOGOUT_URL</param-name>
+            <param-value>https://www.citizenservices.gov.bt/</param-value>
+        </init-param>
+        <!-- Need to include the following for production usage -->
+        <init-param>
+            <param-name>IDTOKEN_KEYSTORE</param-name>
+            <param-value>/opt/jdk1.8.0_77/jre/lib/security/cacerts</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>IDTOKEN_KEYSTORE_PASS</param-name>
+            <param-value>changeit</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>IDTOKEN_CERT_ALIAS</param-name>
+            <param-value>datahub</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ssofilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ssofilter</filter-name>
+        <url-pattern>/sso/*</url-pattern>
+    </filter-mapping>
+
+    <!--SSO Ends-->
+
+</web-app>

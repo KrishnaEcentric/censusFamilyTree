@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Database connection details-->
+
+    <!--<bean id ="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+        <!--<property name="url" value="jdbc:mysql://172.30.3.57:3306/dcrc?characterEncoding=utf8"/>-->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="username"  value="usr_datahub"/>-->
+        <!--<property name="password" value="DataHub@321"/>-->
+        <!--<property name="validationQuery" value="SELECT 1"/>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://172.30.2.12:3306/dcrc?serverTimezone=UTC&amp;useEncoding=true&amp;characterEncoding=UTF-8"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="M0hC@Dcrc@2022#"/>
+        <property name="validationQuery" value="SELECT 1"/>
+    </bean>
+
+</beans>
